@@ -2,20 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/home', (req, res) => {
-    res.json('Nhat Home?')
-})
-router.get('/user', (req, res) => {
-    res.json('Flr user')
-})
-
-router.get('/product', (req, res) => {
-    res.json('Nhat Ok?')
-})
-
-router.get('/cart', (req, res) => {
-    res.json('Nhat Cart?')
-})
+//router.use('/users',require('./users'));
+router.use('/products',require('./products'));
+router.use('/nsxs',require('./nsxs'));
+router.use('/home',require('./home'));
 
 
 module.exports = router;
