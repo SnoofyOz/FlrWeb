@@ -24,12 +24,12 @@ router.post('/login', async function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
   if (!username || !password) {
-    ResHand(res, false, "hay nhap day du thong tin");
+    ResHand(res, false, "Hay nhap day du thong tin");
     return;
   }
   let user = await userModel.findOne({ username: username })
   if (!user) {
-    ResHand(res, false, "username hoac password khong dung");
+    ResHand(res, false, "Username hoac password khong dung");
     return;
   }
   let result = bcrypt.compareSync(password, user.password);
@@ -44,7 +44,7 @@ router.post('/login', async function (req, res, next) {
       data: token
     })
   } else {
-    ResHand(res, false, "username hoac password khong dung");
+    ResHand(res, false, "Username hoac password khong dung");
   }
 });
 
@@ -90,7 +90,7 @@ router.post('/ResetPassword/:token', async function (req, res, next) {
   user.ResetPasswordToken = undefined;
   user.ResetPasswordExp = undefined;
   await user.save();
-  res.status(200).send("doi pass thanh cong");
+  res.status(200).send("Doi pass thanh cong");
 
 });
 router.get('/forgotPassword', function(req, res) {

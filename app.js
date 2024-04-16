@@ -25,7 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/FlrDB').then(
 ).catch(function (err) {
   console.log(err);
 })
-app.use('/flr', require('./routes/index'));
+app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
