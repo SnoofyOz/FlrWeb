@@ -1,30 +1,30 @@
 const mongoose = require('mongoose');
 
 var orderSchema = mongoose.Schema({
-    user: {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+    order: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'order'
     },
     product: {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'product'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'product'
     },
-    totalPrice: {
+    quantity: {
         type: Number,
         required: true
     },
 }, { timestamps: true })
 
 orderSchema.virtual('published', {
-    ref: 'user',
+    ref: 'order',
     localField: '_id',
-    foreignField: 'order'
+    foreignField: 'orderdetails'
 })
 
 orderSchema.virtual('published', {
     ref: 'product',
     localField: '_id',
-    foreignField: 'order'
+    foreignField: 'orderdetails'
 })
  
-module.exports = new mongoose.model('order', orderSchema)
+module.exports = new mongoose.model('orderdetails', orderSchema)
