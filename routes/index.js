@@ -5,7 +5,7 @@ var router = express.Router();
 //router.use('/users',require('./users'));
 router.use('/products',require('./products'));
 router.use('/nsxs',require('./nsxs'));
-router.use('/categorys',require('./categorys'));
+router.use('/shop',require('./shop'));
 router.use('/',require('./home'));
 router.use('/auth',require('./auth'));
 
