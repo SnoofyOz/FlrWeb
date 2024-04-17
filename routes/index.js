@@ -8,6 +8,7 @@ router.use('/nsxs',require('./nsxs'));
 router.use('/shop',require('./shop'));
 router.use('/',require('./home'));
 router.use('/auth',require('./auth'));
+router.use('/contact',require('./contact'));
 
 
 module.exports = router;
