@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm</title>
+    <style>
+        /* CSS cho bảng sản phẩm */
+        .product-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .product-table th, .product-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .product-table th {
+            background-color: #f2f2f2;
+        }
+        .product-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        .add-product-button {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý Sản phẩm</h1>
+
+    <!-- Nút Thêm Sản phẩm -->
+    <button class="add-product-button" onclick="addProduct()">Thêm Sản phẩm</button>
+
+    <!-- Bảng sản phẩm -->
+    <h2>Bảng sản phẩm (Table)</h2>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody"></tbody>
+    </table>
+
+    <script>
+        // Fetch data from server and render products
+        fetch('/products')
+            .then(response => response.json())
+            .then(products => renderProducts(products))
+            .catch(error => console.error('Error fetching products:', error));
+
+        // Function to render products as table rows
+        function renderProducts(products) {
+            const productTableBody = document.getElementById('productTableBody');
+            productTableBody.innerHTML = ''; // Clear existing rows
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product._id}</td>
+                    <td><img src="${product.image}" alt="${product.name}" class="product-image"></td>
+                    <td>${product.name}</td>
+                    <td>$${product.price}.00</td>
+                    <td>
+                        <button onclick="editProduct('${product._id}')">Edit</button>
+                        <button onclick="deleteProduct('${product._id}')">Delete</button>
+                    </td>
+                `;
+                productTableBody.appendChild(row);
+            });
+        }
+
+        // Function to handle adding a product
+        function addProduct() {
+            // Redirect to add page
+            window.location.href = 'QLSP/add_product';
+        }
+
+        // Function to handle editing a product
+        function editProduct(product_Id) {
+            // Redirect to edit page with product ID
+            window.location.href = `/${product._Id}/edit_product`;
+        }
+
+        // Function to handle deleting a product
+        function deleteProduct(product_Id) {
+            // Send DELETE request to delete product
+            fetch(`/products/${product_Id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Reload page after deleting product
+                    window.location.reload();
+                } else {
+                    throw new Error('Failed to delete product');
+                }
+            })
+            .catch(error => console.error('Error deleting product:', error));
+        }
+    </script>
+</body>
+</html>

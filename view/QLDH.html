@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đơn hàng</title>
+    <style>
+        /* CSS cho bảng đơn hàng */
+        .order-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .order-table th, .order-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .order-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý Đơn hàng</h1>
+
+    <!-- Bảng đơn hàng -->
+    <h2>Bảng đơn hàng (Table)</h2>
+    <table class="order-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Người đặt hàng</th>
+                <th>Sản phẩm</th>
+                <th>Tổng tiền</th>
+               
+            </tr>
+        </thead>
+        <tbody id="orderTableBody"></tbody>
+    </table>
+
+    <script>
+        // Fetch data from server
+        fetch('/order')
+            .then(response => response.json())
+            .then(orders => {
+                // Render orders as table
+                const orderTableBody = document.getElementById('orderTableBody');
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${order._id}</td>
+                        <td>${order.user}</td>
+                        <td>${order.product}</td>
+                        <td>${order.totalPrice}</td>
+                        
+                    `;
+                    orderTableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching orders:', error));
+    </script>
+</body>
+</html>
