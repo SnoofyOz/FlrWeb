@@ -12,10 +12,10 @@ categorySchema.virtual('published', {
     localField: '_id',
     foreignField: 'category'
 })
-categorySchema.statics.getcategory = async function() {
+categorySchema.statics.getCategories  = async function() {
     try {
-        const categories = await this.find(); 
-        return categories;
+        const category = await this.find(); 
+        return category;
     } catch (error) {
         throw error;
     }
