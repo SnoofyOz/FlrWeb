@@ -9,6 +9,8 @@ router.use('/shop',require('./shop'));
 router.use('/',require('./home'));
 router.use('/auth',require('./auth'));
 router.use('/contact',require('./contact'));
+router.use('/orders',require('./orders'));
+router.use('/quanli',require('./quanli'));
 
 
 module.exports = router;

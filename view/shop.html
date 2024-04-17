@@ -178,8 +178,8 @@
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+						<li><a href="/">Home</a></li>
+						<!--<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li> -->
 					</ul>
 				</div>
 
@@ -202,12 +202,12 @@
 								.then(response => response.json())
 								.then(categories => {
 									// Render categories
-									const categoryList = document.getElementById('categoryList').querySelector('.sidebar_categories');
-									categories.forEach(category => {
-										const categoryItem = document.createElement('li');
-										const isActive = category._id === activeCategoryId ? 'active' : ''; // Thay activeCategoryId bằng ID của danh mục đang hoạt động
-						
-										categoryItem.innerHTML = `<a href="#" class="${isActive}">${category.name}</a>`;
+									const categoryList = document.getElementById('categoryList');
+									categories.forEach(categories => {
+										const categoryItem = document.createElement('div');
+										categoryItem.classList.add('category-item');
+										categoryItem.textContent = categories.name; // Hiển thị tên thể loại
+
 										categoryList.appendChild(categoryItem);
 									});
 								})
